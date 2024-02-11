@@ -18,13 +18,14 @@ public partial class MainPage : ContentPage
 
     void InitializeTCP()
     {
-        server = new TcpListener(IPAddress.Any, 12345);
+        // w celu sprawdzenia działąnia stworzyć drugą instancje programu z portami ustawionymi na odwrót
+        server = new TcpListener(IPAddress.Any, 12345); // w drugiej instancji port 12345 zmienić na 54321
         server.Start();
 
         Task.Run(() => StartServer());
 
         client = new TcpClient();
-        client.Connect("127.0.0.1", 54321);
+        client.Connect("127.0.0.1", 54321); // w drugiej instancji port 54321 zmienić na 12345
         serverStream = client.GetStream();
 
         Task.Run(() => StartClient());
