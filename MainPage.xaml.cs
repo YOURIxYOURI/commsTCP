@@ -6,6 +6,7 @@ namespace commsTCP;
 
 public partial class MainPage : ContentPage
 {
+    bool Clicked = false;
     TcpListener server;
     TcpClient client;
     NetworkStream serverStream;
@@ -25,15 +26,6 @@ public partial class MainPage : ContentPage
         Task.Run(() => StartServer());
 
        
-    }
-
-    async void Connect_Clicked(object sender, EventArgs e)
-    {
-        client = new TcpClient();
-        client.Connect("127.0.0.1", 54321);  // w drugiej instancji port 54321 zmienić na 12345
-        serverStream = client.GetStream();
-
-        Task.Run(() => StartClient());
     }
     async Task StartServer()
     {
@@ -57,6 +49,17 @@ public partial class MainPage : ContentPage
             {
                 ChatMessagesStack.Children.Add(new Label { Text = "Otrzymano: " + message });
             });
+        }
+    }
+    async void Connect_Clicked(object sender, EventArgs e)
+    {
+        if (!Clicked)
+        {
+            client = new TcpClient();
+            client.Connect("127.0.0.1", 54321);  // w drugiej instancji port 54321 zmienić na 12345
+            serverStream = client.GetStream();
+
+            Task.Run(() => StartClient());
         }
     }
 
