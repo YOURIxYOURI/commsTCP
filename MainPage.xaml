@@ -12,6 +12,7 @@
 
         <Entry x:Name="MessageEntry" Placeholder="Wpisz wiadomość" Margin="10"/>
         <Button Text="Wyślij" Clicked="SendMessage_Clicked" Margin="10"/>
+        <Button Text="połącz z drugą instatncją" Clicked="Connect_Clicked" Margin="10"/>
     </StackLayout>
 
 </ContentPage>

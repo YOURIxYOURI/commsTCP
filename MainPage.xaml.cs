@@ -24,13 +24,17 @@ public partial class MainPage : ContentPage
 
         Task.Run(() => StartServer());
 
+       
+    }
+
+    async void Connect_Clicked(object sender, EventArgs e)
+    {
         client = new TcpClient();
-        client.Connect("127.0.0.1", 54321); // w drugiej instancji port 54321 zmienić na 12345
+        client.Connect("127.0.0.1", 54321);  // w drugiej instancji port 54321 zmienić na 12345
         serverStream = client.GetStream();
 
         Task.Run(() => StartClient());
     }
-
     async Task StartServer()
     {
         while (true)
@@ -92,6 +96,7 @@ public partial class MainPage : ContentPage
         }
         MessageEntry.Text = string.Empty;
     }
+    
 }
 
 
